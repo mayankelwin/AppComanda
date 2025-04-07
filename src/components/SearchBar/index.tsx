@@ -13,7 +13,7 @@ export function SearchBar({ placeholder, value, onChangeText, }: SearchBarProps)
       <InputSearch
         placeholder={placeholder}
         placeholderTextColor="#616161"
-        value="value"
+        value={value}
         onChangeText={onChangeText}
       />
     </Container>

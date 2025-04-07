@@ -78,7 +78,7 @@ export function useMapServiceController() {
   
     return filtered.filter((table) => {
       const titleMatch = table.title?.toLowerCase().includes(lowerSearch);
-      const idMatch = String(table.id).includes(lowerSearch);
+      const idMatch = String(table.orderSheets?.[0]?.customerName).toLowerCase().includes(lowerSearch);
       return titleMatch || idMatch;
     });
   }, [normalizedTables, selectedFilter, searchTerm]);
