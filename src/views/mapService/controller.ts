@@ -8,7 +8,7 @@ type FiltroStatus = "Visão Geral" | "Em Atendimento" | "Disponível" | "Ociosas
 
 const TEMPO_OCIOSO_LIMITE = 15;
 
-export function useMapaAtendimentosController() {
+export function useMapServiceController() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const dispatch = useDispatch();
   const [selectedFilter, setSelectedFilter] = useState<FiltroStatus>("Visão Geral");
@@ -26,20 +26,20 @@ export function useMapaAtendimentosController() {
     if (!Array.isArray(tablesRedux)) return [];
   
     return tablesRedux.map((table) => {
-      const primeiraComanda = table.orderSheets?.[0];
-      const hasComandaAberta = table.orderSheets && table.orderSheets.length > 0;
-      const tempoOciosoSeg = Number(primeiraComanda?.idleTime ?? 0);
-      const subtotal = primeiraComanda?.subtotal ?? 0;
+      const firstCommand = table.orderSheets?.[0];
+      const hasCommandOpen = table.orderSheets && table.orderSheets.length > 0;
+      const timeIdle = Number(firstCommand?.idleTime ?? 0);
+      const subtotal = firstCommand?.subtotal ?? 0;
   
       let status: Table["status"];
   
-      if (!hasComandaAberta && table.activity === "empty") {
+      if (!hasCommandOpen && table.activity === "empty") {
         status = "Disponível";
-      } else if (hasComandaAberta && subtotal === 0) {
+      } else if (hasCommandOpen && subtotal === 0) {
         status = "Sem Pedidos";
-      } else if (hasComandaAberta && subtotal > 0 && tempoOciosoSeg > TEMPO_OCIOSO_LIMITE) {
+      } else if (hasCommandOpen && subtotal > 0 && timeIdle > TEMPO_OCIOSO_LIMITE) {
         status = "Ociosas";
-      } else if (hasComandaAberta && subtotal > 0 && tempoOciosoSeg <= TEMPO_OCIOSO_LIMITE) {
+      } else if (hasCommandOpen && subtotal > 0 && timeIdle <= TEMPO_OCIOSO_LIMITE) {
         status = "Em Atendimento";
       } else {
         status = "Desconhecido";
@@ -49,9 +49,9 @@ export function useMapaAtendimentosController() {
         ...table,
         status,
         isOciosa: status === "Ociosas",
-        hasComandaAberta,
+        hasCommandOpen,
         subtotal,
-        tempoOciosoSeg,
+        timeIdle,
       };
     });
   }, [tablesRedux]);  

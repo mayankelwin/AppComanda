@@ -8,7 +8,7 @@ import { FilterTabs } from "../../components/FilterTabs";
 import { TableCard } from "../../components/TableCard";
 import { FlashList } from "@shopify/flash-list";
 
-import { useMapaAtendimentosController } from "./controller";
+import { useMapServiceController } from "./controller";
 import { useRef, useEffect } from "react";
 
 export function MapaAtendimentos() {
@@ -19,7 +19,7 @@ export function MapaAtendimentos() {
     loadMoreTables,
     searchTerm,
     setSearchTerm,
-  } = useMapaAtendimentosController();
+  } = useMapServiceController();
 
   const listRef = useRef<FlashList<any>>(null);
 
