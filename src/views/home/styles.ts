@@ -24,7 +24,7 @@ export const Content = styled.View`
   ${({ theme }) => css`
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     gap: ${theme.SPACING.SM}px;
   `}

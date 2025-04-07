@@ -2,7 +2,8 @@ import { FlatList, TouchableOpacity } from "react-native";
 import { Container, TabText, SelectedTab } from "./styles";
 
 const filters = 
-["Visão Geral", "Em Atendimento", "Ociosas", "Sem Pedidos", "Disponíveis"];
+["Em Atendimento", "Ociosas", "Sem Pedidos", "Disponível"];
+const fixedFilters = ["Visão Geral"];
 
 type Props = {
   selected: string;
@@ -10,17 +11,21 @@ type Props = {
 };
 
 export function FilterTabs({ selected, onSelect }: Props) {
+
   return (
     <Container>
+
       <TouchableOpacity onPress={() => onSelect("Visão Geral")}>
       <SelectedTab isActive={selected === "Visão Geral"}>
               <TabText isActive={selected === "Visão Geral"}>Visão Geral</TabText>
       </SelectedTab>
          </TouchableOpacity>
+
       <FlatList
         horizontal
         data={filters}
         keyExtractor={(item) => item}
+        showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => (
           <TouchableOpacity onPress={() => onSelect(item)}>
             <SelectedTab isActive={selected === item} >
@@ -28,7 +33,6 @@ export function FilterTabs({ selected, onSelect }: Props) {
             </SelectedTab>
           </TouchableOpacity>
         )}
-        showsHorizontalScrollIndicator={false}
       />
     </Container>
   );

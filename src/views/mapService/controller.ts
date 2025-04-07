@@ -6,7 +6,7 @@ import { Table } from "../../types/Table";
 
 type FiltroStatus = "Visão Geral" | "Em Atendimento" | "Disponível" | "Ociosas" | "Sem Pedidos";
 
-const TEMPO_OCIOSO_LIMITE = 900;
+const TEMPO_OCIOSO_LIMITE = 15;
 
 export function useMapaAtendimentosController() {
   const dispatch = useDispatch();
@@ -27,7 +27,7 @@ export function useMapaAtendimentosController() {
     return tablesRedux.map((table) => {
       const primeiraComanda = table.orderSheets?.[0];
       const hasComandaAberta = table.orderSheets && table.orderSheets.length > 0;
-      const tempoOciosoSeg = Number(primeiraComanda?.idleTime);
+      const tempoOciosoSeg = Number(primeiraComanda?.idleTime ?? 0);
       const subtotal = primeiraComanda?.subtotal ?? 0;
   
       let status: Table["status"];

@@ -13,8 +13,8 @@ export const Container = styled.View`
 `;
 
 export const BTN = styled.TouchableOpacity`
-  width: ${buttonWidth}px;
-  height: ${buttonWidth}px;
+  width: ${({ theme }) => theme.SIZES.button};
+  height: ${({ theme }) => theme.SIZES.button};
   padding: ${({ theme }) => theme.SPACING.MD}px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
   border-radius: 12px;
@@ -23,6 +23,7 @@ export const BTN = styled.TouchableOpacity`
 
 export const Title = styled.Text`
   ${({ theme }) => css`
+    width: ${buttonWidth}px;
     font-size: ${theme.FONT_SIZE.LG}px;
     font-family: ${theme.FONT_FAMILY.bold};
     color: ${theme.COLORS.GRAY_700};

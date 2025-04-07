@@ -1,4 +1,3 @@
-import { TextInput } from "react-native";
 import { Container, Icon, InputSearch } from "./styles";
 
 export function SearchBar({ placeholder }: { placeholder: string }) {

@@ -8,7 +8,7 @@ interface StatusProps {
 export const Container = styled.View<StatusProps>`
   flex: 1;
   height: ${({ theme }) => theme.SIZES.cardy};
-  margin: 10px 4px 4px 6px;
+  margin: 10px 4px 4px 4px;
   border-radius: 12px;
   padding: 10px;
   justify-content: flex-start;

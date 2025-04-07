@@ -1,7 +1,7 @@
 import { Header } from "../../components/Header";
 import { Container } from "../../theme/global";
 import { GridContainer } from "./styles";
-import { formatCurrency, formatSecondsToTime } from "../../utils/formatters";
+import { formatCurrency} from "../../utils/formatters";
 
 import { SearchBar } from "../../components/SearchBar";
 import { FilterTabs } from "../../components/FilterTabs";
@@ -21,7 +21,6 @@ export function MapaAtendimentos() {
 
   const listRef = useRef<FlashList<any>>(null);
 
-  // Tentativa de Scroll Suave 
   useEffect(() => {
     const timeout = setTimeout(() => {
       listRef.current?.scrollToOffset({ offset: 0, animated: true });
