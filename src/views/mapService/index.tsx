@@ -11,7 +11,7 @@ import { FlashList } from "@shopify/flash-list";
 import { useMapServiceController } from "./controller";
 import { useRef, useEffect } from "react";
 
-export function MapaAtendimentos() {
+export function MapaService() {
   const {
     tables,
     selectedFilter,

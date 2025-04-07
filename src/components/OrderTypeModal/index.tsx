@@ -12,7 +12,6 @@ import {
 } from "./styles";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import EvilIcons from "react-native-vector-icons/EvilIcons";
 
 type Props = {
   visible: boolean;
