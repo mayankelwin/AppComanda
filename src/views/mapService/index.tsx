@@ -17,6 +17,8 @@ export function MapaAtendimentos() {
     selectedFilter,
     setSelectedFilter,
     loadMoreTables,
+    searchTerm,
+    setSearchTerm,
   } = useMapaAtendimentosController();
 
   const listRef = useRef<FlashList<any>>(null);
@@ -32,7 +34,11 @@ export function MapaAtendimentos() {
   return (
     <Container>
       <Header visibleheader2 />
-      <SearchBar placeholder="Cliente, mesa, comanda, atendente" />
+      <SearchBar
+       placeholder="Cliente, mesa, comanda, atendente"
+       value={searchTerm}
+       onChangeText={setSearchTerm}
+      />
       <FilterTabs
         selected={selectedFilter}
         onSelect={setSelectedFilter}
@@ -42,6 +48,7 @@ export function MapaAtendimentos() {
         <FlashList
           ref={listRef}
           data={tables}
+
           keyExtractor={(item, index) => `${item.id}-${index}`}
           numColumns={3}
           estimatedItemSize={200}

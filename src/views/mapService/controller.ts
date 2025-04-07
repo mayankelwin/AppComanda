@@ -9,6 +9,7 @@ type FiltroStatus = "Visão Geral" | "Em Atendimento" | "Disponível" | "Ociosas
 const TEMPO_OCIOSO_LIMITE = 15;
 
 export function useMapaAtendimentosController() {
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const dispatch = useDispatch();
   const [selectedFilter, setSelectedFilter] = useState<FiltroStatus>("Visão Geral");
   const [renderedTables, setRenderedTables] = useState<Table[]>([]);
@@ -56,29 +57,32 @@ export function useMapaAtendimentosController() {
   }, [tablesRedux]);  
 
   const filteredTables = useMemo(() => {
-    switch (selectedFilter) {
-      case "Visão Geral":
-        return normalizedTables;
-
+    const filtered = normalizedTables.filter((table) => {
+      switch (selectedFilter) {
         case "Em Atendimento":
-          return normalizedTables.filter(
-            (table) => table.status === "Em Atendimento"
-          );
-
+          return table.status === "Em Atendimento";
         case "Ociosas":
-          return normalizedTables.filter((table) => table.status === "Ociosas");
-
-
-      case "Sem Pedidos":
-        return normalizedTables.filter((table) => table.status === "Sem Pedidos");
-
-      case "Disponível":
-        return normalizedTables.filter((table) => table.status === "Disponível");
-
-      default:
-        return normalizedTables;
-    }
-  }, [normalizedTables, selectedFilter]);
+          return table.status === "Ociosas";
+        case "Sem Pedidos":
+          return table.status === "Sem Pedidos";
+        case "Disponível":
+          return table.status === "Disponível";
+        default:
+          return true;
+      }
+    });
+  
+    if (searchTerm.trim() === "") return filtered;
+  
+    const lowerSearch = searchTerm.toLowerCase();
+  
+    return filtered.filter((table) => {
+      const titleMatch = table.title?.toLowerCase().includes(lowerSearch);
+      const idMatch = String(table.id).includes(lowerSearch);
+      return titleMatch || idMatch;
+    });
+  }, [normalizedTables, selectedFilter, searchTerm]);
+  
 
   useEffect(() => {
     setRenderedTables(filteredTables.slice(0, 20));
@@ -104,5 +108,7 @@ export function useMapaAtendimentosController() {
     setSelectedFilter,
     tables: renderedTables,
     loadMoreTables,
+    searchTerm,
+    setSearchTerm,
   };
 }
