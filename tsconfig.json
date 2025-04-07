@@ -1,3 +1,14 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+"extends": "@react-native/typescript-config/tsconfig.json",
+"compilerOptions": {
+    "strict": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@types/*": ["@types/*"]
+    },
+    "types": ["styled-components", "react-native"],
+    "skipLibCheck": true
+  },
+  "include": ["src", "src/@types"]
 }
+

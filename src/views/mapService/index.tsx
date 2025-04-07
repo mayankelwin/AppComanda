@@ -1,0 +1,74 @@
+import { Header } from "../../components/Header";
+import { Container } from "../../theme/global";
+import { GridContainer } from "./styles";
+import { formatCurrency, formatSecondsToTime } from "../../utils/formatters";
+
+import { SearchBar } from "../../components/SearchBar";
+import { FilterTabs } from "../../components/FilterTabs";
+import { TableCard } from "../../components/TableCard";
+import { FlashList } from "@shopify/flash-list";
+
+import { useMapaAtendimentosController } from "./controller";
+import { useRef, useEffect } from "react";
+
+export function MapaAtendimentos() {
+  const {
+    tables,
+    selectedFilter,
+    setSelectedFilter,
+    loadMoreTables,
+  } = useMapaAtendimentosController();
+
+  const listRef = useRef<FlashList<any>>(null);
+
+  // Tentativa de Scroll Suave 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      listRef.current?.scrollToOffset({ offset: 0, animated: true });
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, [selectedFilter]);
+
+  return (
+    <Container>
+      <Header visibleheader2 />
+      <SearchBar placeholder="Cliente, mesa, comanda, atendente" />
+      <FilterTabs
+        selected={selectedFilter}
+        onSelect={setSelectedFilter}
+      />
+
+      <GridContainer>
+        <FlashList
+          ref={listRef}
+          data={tables}
+          keyExtractor={(item, index) => `${item.id}-${index}`}
+          numColumns={3}
+          estimatedItemSize={200}
+          showsVerticalScrollIndicator={false}
+          onEndReached={loadMoreTables}
+          onEndReachedThreshold={0.5}
+          contentContainerStyle={{ gap: 12, paddingBottom: 16 }}
+          columnWrapperStyle={{ gap: 12 }}
+          renderItem={({ item }) => (
+            <TableCard
+              number={item.title}
+              status={item.status}
+              client={item.orderSheets?.[0]?.user?.name ?? ""}
+              customerName={item.orderSheets?.[0]?.customerName ?? ""}
+              waitingTime={item.idleTime }
+              bill={
+                item.orderSheets?.[0]?.subtotal != null
+                  ? formatCurrency(item.orderSheets[0].subtotal)
+                  : undefined
+              }
+              ordersCount={1}
+              customersCount={item.orderSheets?.[0]?.numberOfCustomers ?? 0}
+            />
+          )}
+        />
+      </GridContainer>
+    </Container>
+  );
+}

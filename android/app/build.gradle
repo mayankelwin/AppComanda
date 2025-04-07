@@ -105,6 +105,7 @@ android {
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+    
 }
 
 dependencies {
@@ -117,3 +118,11 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+// React Icons
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf', 'FontAwesome.ttf' ] // Specify font files
+]
+
+apply from: ("../../node_modules/react-native-vector-icons/fonts.gradle")
+
