@@ -1,24 +1,20 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
-
-import { ThemeProvider } from "styled-components";
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
-import { store } from './src/store'; 
+import { ThemeProvider } from 'styled-components/native';
 
-import theme from './src/theme';
 import { Routes } from './src/routes';
+import theme from './src/theme';
+import { store } from './src/store';
 
 export default function App() {
   return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="transparent"
-          translucent
-        />
-        <Routes />
-      </ThemeProvider>
-    </Provider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <Routes />
+        </ThemeProvider>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }
