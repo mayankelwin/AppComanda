@@ -31,9 +31,6 @@ export function Header( {visibleheader1 = false, visibleheader2 = false}: Props)
             </Content>
 
           )}
-         
-    
-
         </Container>
     );
 }

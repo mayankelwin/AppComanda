@@ -8,10 +8,12 @@ const { height } = Dimensions.get("window");
 
 export const Container = styled.View`
   width: 100%;
-  height: ${height * 0.08}px; /* 8% da altura da tela */
-  margin-top: ${height * 0.05}px; /* 5% da altura da tela */
+  height: ${height * 0.08}px; 
+  margin-top: ${height * 0.05}px; 
   border-bottom-width: 5px;
   border-bottom-color: ${({ theme }) => theme.COLORS.BG_GRAY};
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ImgBox = styled.View`
@@ -20,8 +22,9 @@ export const ImgBox = styled.View`
   `
 
 export const Logo = styled.Image`
-width: 205px;
+width: 195px;
 height: 25px;
+align-self: center;
 `
 
 export const Icon = styled(MaterialIcons)`
@@ -30,12 +33,12 @@ export const Icon = styled(MaterialIcons)`
 `;
 
 export const Content = styled.View`
+  margin-left: 20px;
   flex-direction: row;
   width: 100%;
   align-items: center;
- background-color: ${({ theme }) => theme.COLORS.BG};
-
-  gap: 50px;
+  background-color: ${({ theme }) => theme.COLORS.BG};
+  gap: 17%;
 `
 export const Title = styled.Text`
 ${({theme} ) => css `
@@ -46,13 +49,14 @@ ${({theme} ) => css `
   text-align: center;
   justify-content: center;
   align-items: center;
-  
-`}
+  `}
   margin-bottom: 8px;
+
 `;
 
 export const ButtonBack = styled.TouchableOpacity`
   align-items: center;
-  padding: 15px;
   border-radius: 10px;
-  margin-bottom: 10px;`
+  margin-bottom: 10px; 
+  
+  `
