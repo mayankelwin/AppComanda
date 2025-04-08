@@ -1,97 +1,109 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+📜 Mapa de Atendimentos - Pigz
 
-# Getting Started
+Aplicativo mobile para gerenciamento de mesas com integração real-time à API Pigz, utilizando MVVM, FlashList e Redux Toolkit.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+📑 Sumário
+1. Tecnologias Utilizadas
 
-## Step 1: Start Metro
+2. Arquitetura
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+3. Organização de Pastas
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+4. Funcionalidades Implementadas
 
-```sh
-# Using npm
-npm start
+5. Regras de Negócio
 
-# OR using Yarn
-yarn start
-```
+1. Tecnologias Utilizadas
+React Native CLI – Framework principal para desenvolvimento mobile nativo.
 
-## Step 2: Build and run your app
+TypeScript – Tipagem estática para maior segurança e produtividade.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Redux Toolkit – Gerenciamento de estado global, com slices modulares.
 
-### Android
+AsyncStorage – Persistência local (cache dos dados de mesas).
 
-```sh
-# Using npm
-npm run android
+FlashList (Shopify) – Lista performática para grandes volumes de dados.
 
-# OR using Yarn
-yarn android
-```
+Axios – Integração com APIs REST.
 
-### iOS
+Lucide Icons – Ícones modernos (SearchBar).
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+MaterialIcons – Ícones vetoriais para a interface.
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+Skeleton – Componentes de carregamento animado.
 
-```sh
-bundle install
-```
+2. Arquitetura
+Padrão adotado: MVVM (Model-View-ViewModel)
 
-Then, and every time you update your native dependencies, run:
+Camada	Descrição
+Model	Tipos e estruturas de dados (types/Table.ts).
+View	Componentes de UI (components/*, views/MapService).
+ViewModel	useMapServiceController e useHomeController: lógica de estado, filtros e busca.
+3. Organização de Pastas
+bash
+Copiar
+Editar
+📁 store/
+ ┣ 📄 tableSlice.ts       # Lista de mesas, loading, error
+ ┗ 📄 index.ts            # Setup do Redux Toolkit + Thunk
 
-```sh
-bundle exec pod install
-```
+📁 types/
+ ┗ 📄 Table.ts            # Tipagem das mesas
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+📁 utils/
+ ┗ 📄 formatters.ts       # Formatadores (ex: valores monetários)
 
-```sh
-# Using npm
-npm run ios
+📁 components/
+ ┣ 📄 TableCard.tsx       # Card de mesa
+ ┣ 📄 SearchBar.tsx       # Busca por nome do cliente
+ ┣ 📄 FilterTabs.tsx      # Filtro por status
+ ┣ 📄 Header.tsx
+ ┣ 📄 OrderTypeModal.tsx
+ ┣ 📄 SkeletonCard.tsx
+ ┗ 📄 GlobalButton.tsx
 
-# OR using Yarn
-yarn ios
-```
+📁 screens/
+ ┣ 📁 Home/
+ ┃ ┣ 📄 index.tsx         # View principal
+ ┃ ┗ 📄 controller.ts     # Lógica de filtros e paginação
+ ┗ 📁 MapaService/
+   ┣ 📄 index.tsx
+   ┗ 📄 controller.ts
+   
+4. Funcionalidades Implementadas
+🔗 Integração com API (Pigz)
+Endpoint: GET https://test.pigz.dev/api/pdv/order-sheet/v2/checkpads
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+Auth: Token via Basic Authorization
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+Armazenamento: Redux + cache em AsyncStorage
 
-## Step 3: Modify your app
+⚡ FlashList
+numColumns para suporte a grids
 
-Now that you have successfully run the app, let's make changes!
+loadMoreTables para paginação customizada
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+Loop infinito: ao final dos dados, mais 20 registros são carregados
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+🎯 Filtro de Mesas
+Visão Geral
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+Em Atendimento
 
-## Congratulations! :tada:
+Disponível
 
-You've successfully run and modified your React Native App. :partying_face:
+Ociosas
 
-### Now what?
+Sem Pedidos
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+🔎 Busca Integrada
+Busca por customerName
 
-# Troubleshooting
+Busca por title (número da mesa)
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+5. Regras de Negócio
+Status	Condição	Cor do Card
+Disponível	Sem comanda (activity === 'empty')	⚪ Branco
+Sem Pedidos	Comanda aberta (subtotal === 0)	🟡 Amarelo
+Em Atendimento	Comanda aberta (subtotal > 0) e idleTime ≤ 10 minutos	🟢 Verde
+Ociosas	idleTime > 10 minutos e subtotal > 0	🔴 Vermelho
