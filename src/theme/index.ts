@@ -30,10 +30,10 @@ const theme = {
   },
 
   FONT_SIZE: {
-    SM: width * 0.035,              // 3.5% da largura da tela
-    MD: width * 0.04,              // 4% da largura da tela
-    LG: width * 0.045,            // 4.5% da largura da tela
-    XL: width * 0.06,            // 6% da largura da tela
+    SM: width * 0.035,                // 3.5% da largura da tela
+    MD: width * 0.04,                // 4% da largura da tela
+    LG: width * 0.045,              // 4.5% da largura da tela
+    XL: width * 0.06,              // 6% da largura da tela
     XXL: width * 0.08,            // 8% da largura da tela
   },
 
@@ -45,7 +45,7 @@ const theme = {
   },
 
   SIZES: {
-    cardy: width * 0.35,
+    cardy: width * 0.40,
     button: width * 0.42,
   },
 

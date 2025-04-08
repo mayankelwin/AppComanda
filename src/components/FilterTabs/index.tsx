@@ -43,6 +43,7 @@ export function FilterTabs({ selected, onSelect }: Props) {
 
       <FlatList
         ref={flatListRef}
+        keyboardShouldPersistTaps="always"
         horizontal
         data={filters}
         keyExtractor={(item) => item}

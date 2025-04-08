@@ -11,8 +11,8 @@ export const Container = styled.View`
 export const SelectedTab = styled.View<{ isActive: boolean }>`
   padding: 14px 16px;
 
-  border-radius: 20px;
-  margin-right: 8px;
+  border-radius: 25px;
+  margin-right: 10px;
   ${({ isActive, theme }) =>
     isActive
       ? css`

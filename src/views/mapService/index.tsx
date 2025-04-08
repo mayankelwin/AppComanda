@@ -39,16 +39,17 @@ export function MapaService() {
        value={searchTerm}
        onChangeText={setSearchTerm}
       />
+
+      <GridContainer>
       <FilterTabs
         selected={selectedFilter}
         onSelect={setSelectedFilter}
       />
-
-      <GridContainer>
         <FlashList
           ref={listRef}
           data={tables}
-
+          keyboardShouldPersistTaps="always"
+          
           keyExtractor={(item, index) => `${item.id}-${index}`}
           numColumns={3}
           estimatedItemSize={200}

@@ -5,6 +5,7 @@ export const Container = styled.View`
   flex-direction: row;
   align-items: center;
 
+  
 
   padding: ${({ theme }) => theme.SPACING.SM}px;
 
@@ -17,8 +18,8 @@ export const Container = styled.View`
 export const InputSearch = styled.TextInput`
   color: ${({ theme }) => theme.COLORS.BLACK};
   padding: 10px;
-  width: 80%;
-  border: 1px solid ${({ theme }) => theme.COLORS.GRAY_100};
+  width: 100%;
+  size: 16px;
   border-radius: 25px;
 `;
 

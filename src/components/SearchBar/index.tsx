@@ -13,12 +13,10 @@ export function SearchBar({ placeholder, value, onChangeText, }: SearchBarProps)
       <InputSearch 
         placeholder={placeholder}
         placeholderTextColor="#616161"
+        style={{fontSize: 16}}
         value={value}
         onChangeText={onChangeText}
-        keyboardType="name-phone-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        autoFocus
+        keyboardType="default"
         
       />
     </Container>

@@ -13,7 +13,7 @@ export const Container = styled.View<StatusProps>`
   
   border-radius: 12px;
   padding: 10px;
-  justify-content: flex-start;
+  justify-content: space-between;
   background-color: ${({ status, theme }) =>
     status === "Ociosas"
       ? theme.COLORS.RED
@@ -56,6 +56,7 @@ export const Icon = styled(MaterialIcons)`
 
 export const StatusTag = styled.Text<StatusProps>`
   color: black;
-  font-size: 12px;
+  width: 70px;
+  font-size: 11px;
   font-weight: bold;
 `;

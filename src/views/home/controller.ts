@@ -6,8 +6,12 @@ export function useHomeController() {
   function handleMap (){
     navigation.navigate('Mapa');
   }
+  function handleSettings (){
+    navigation.navigate('Settings');
+  }
 
   return {
     handleMap,
+    handleSettings
   };
 }

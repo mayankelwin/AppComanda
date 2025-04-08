@@ -3,6 +3,6 @@ export declare global {
         interface RootParamList{
             Home: undefined;
             Mapa: undefined;
-            Config: undefined;
+            Settings: undefined;
     }
 }}
