@@ -38,7 +38,7 @@ export const Content = styled.View`
   width: 100%;
   align-items: center;
   background-color: ${({ theme }) => theme.COLORS.BG};
-  gap: 17%;
+  gap: ${({ theme }) => theme.SPACING.SM}px;
 `
 export const Title = styled.Text`
 ${({theme} ) => css `

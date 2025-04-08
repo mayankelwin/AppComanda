@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components/native";
-import { Dimensions } from "react-native";
 
 export const Title = styled.Text`
   ${({ theme }) => css`
