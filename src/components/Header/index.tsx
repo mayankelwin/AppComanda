@@ -1,5 +1,4 @@
 import { useState } from "react";
-import VectorImage from 'react-native-vector-image';
 import { ButtonBack, Container, Content, Icon, ImgBox, Logo, Title } from "./styles";
 import LogoImg from '../../assets/logo.png';
 

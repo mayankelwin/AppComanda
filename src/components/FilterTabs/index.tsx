@@ -13,14 +13,15 @@ type Props = {
 export function FilterTabs({ selected, onSelect }: Props) {
   const flatListRef = useRef<FlatList>(null);
 
-  // index para centralizar filtros
   const getFilterIndex = (filter: string) => {
     return filters.findIndex((item) => item === filter);
   };
 
-  // Quando mudar o filtro, centraliza
   useEffect(() => {
-    if (selected === "Visão Geral") return; 
+    if (selected === "Visão Geral") {
+      flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+      return;
+    }
 
     const index = getFilterIndex(selected);
     if (index !== -1 && flatListRef.current) {

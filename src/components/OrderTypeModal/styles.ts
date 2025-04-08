@@ -13,15 +13,6 @@ export const ModalContent = styled.View`
   border-top-right-radius: 20px;
 `;
 
-export const Header = styled.View`
-  width: 50px;
-  height: 4px;
-  background-color: #ccc;
-  align-self: center;
-  margin-bottom: 10px;
-  border-radius: 2px;
-`;
-
 export const Title = styled.Text`
   font-size: 18px;
   font-weight: bold;
