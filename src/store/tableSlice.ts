@@ -27,7 +27,7 @@ export const fetchTables = createAsyncThunk('tables/fetchTables', async () => {
   );
 
   console.log("📡 API DATA:", response.data);
-  return response.data.checkpads; // <-- corrigido aqui
+  return response.data.checkpads; 
 });
 
 const tableSlice = createSlice({
@@ -42,7 +42,7 @@ const tableSlice = createSlice({
       })
       .addCase(fetchTables.fulfilled, (state, action) => {
         state.loading = false;
-        state.tables = action.payload; // aqui já recebe só os checkpads (as mesas)
+        state.tables = action.payload;
       })
       .addCase(fetchTables.rejected, (state, action) => {
         state.loading = false;

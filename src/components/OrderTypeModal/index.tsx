@@ -36,8 +36,8 @@ export function OrderTypeModal({ visible, onClose, onSelect }: Props) {
       ref={modalRef}
       adjustToContentHeight
       onClosed={onClose}
-      panGestureEnabled // permite arrastar para fechar
-      closeOnOverlayTap // fechar ao tocar fora da tela
+      panGestureEnabled 
+      closeOnOverlayTap 
       handlePosition="inside"
       modalStyle={{
         borderTopLeftRadius: 16,

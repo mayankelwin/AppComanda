@@ -45,7 +45,6 @@ const theme = {
   },
 
   SIZES: {
-    cardx: width * 0.30,
     cardy: width * 0.35,
     button: width * 0.42,
   },

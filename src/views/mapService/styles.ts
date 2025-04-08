@@ -14,5 +14,5 @@ export const GridContainer = styled.View`
   flex: 1;
   justify-content: center;
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY};
-  
+  padding: 0px 4px 0px 4px;
   `

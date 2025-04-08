@@ -2,15 +2,18 @@ import styled from "styled-components/native";
 
 export const ModalContainer = styled.View`
   flex: 1;
-  background-color: rgba(0, 0, 0, 0.29);
+  background-color: rgba(0, 0, 0, 0.07);
   justify-content: flex-end;
+  width: 100%;
+  
 `;
 
 export const ModalContent = styled.View`
   background-color: white;
-  padding: 20px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
+  gap: 4px;
+  margin-bottom: 35px;
 `;
 
 export const Title = styled.Text`
@@ -18,6 +21,7 @@ export const Title = styled.Text`
   font-weight: bold;
   text-align: center;
   color: #333;
+  margin-top: 30px;
 `;
 
 export const Subtitle = styled.Text`

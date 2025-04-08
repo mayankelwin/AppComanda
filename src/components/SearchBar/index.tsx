@@ -10,11 +10,16 @@ export function SearchBar({ placeholder, value, onChangeText, }: SearchBarProps)
   return (
     <Container>
       <Icon name="search" size={24} />
-      <InputSearch
+      <InputSearch 
         placeholder={placeholder}
         placeholderTextColor="#616161"
         value={value}
         onChangeText={onChangeText}
+        keyboardType="name-phone-pad"
+        autoCapitalize="none"
+        autoCorrect={false}
+        autoFocus
+        
       />
     </Container>
   );
