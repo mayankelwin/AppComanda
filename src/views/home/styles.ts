@@ -26,6 +26,6 @@ export const Content = styled.View`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: ${theme.SPACING.SM}px;
+    gap: ${theme.SPACING.LG}px;
   `}
 `;

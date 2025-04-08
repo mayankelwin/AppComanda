@@ -24,7 +24,7 @@ export const BTN = styled.TouchableOpacity`
 export const Title = styled.Text`
   ${({ theme }) => css`
     width: ${buttonWidth}px;
-    font-size: ${theme.FONT_SIZE.LG}px;
+    font-size: ${theme.FONT_SIZE.MD}px;
     font-family: ${theme.FONT_FAMILY.bold};
     color: ${theme.COLORS.GRAY_700};
     margin-top: ${theme.SPACING.SM}px;

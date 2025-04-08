@@ -46,7 +46,7 @@ const theme = {
 
   SIZES: {
     cardy: width * 0.40,
-    button: width * 0.42,
+    button: width * 0.40,
   },
 
   BORDER_RADIUS: {
