@@ -1,4 +1,3 @@
-import { Alert } from 'react-native';
 import React, { useState } from 'react';
 
 import { Container, ContentContainer } from '../../theme/global';
@@ -26,8 +25,8 @@ export function Home() {
       <Header visibleheader1 />
 
       <ContentContainer> 
-        <Title>Mayan Kelwin!</Title>
-        <SubTitle>Pigz Loja 1, 123 Avenida da Liberdade, SP, 01234-567</SubTitle>
+        <Title>Ghabrichelson</Title>
+        <SubTitle>Zigpi Restaurante</SubTitle>
 
         <Content>
           <GlobalButton name='Novo pedido' onPress={handleOpenModal} nomeIcon='add' />

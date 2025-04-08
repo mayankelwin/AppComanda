@@ -5,7 +5,7 @@ export const Title = styled.Text`
   ${({ theme }) => css`
     margin-top: ${theme.SPACING.SM}px;
     font-size: ${theme.FONT_SIZE.XL}px;
-    font-family: ${theme.FONT_FAMILY.bold};
+    font-weight: bold;
     color: ${theme.COLORS.GRAY_700};
   `}
 `;
