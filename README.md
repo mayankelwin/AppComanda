@@ -1,97 +1,120 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📜 Mapa de Atendimentos - Pigz
 
-# Getting Started
+[![React Native](https://img.shields.io/badge/React%20Native-2025-blue?logo=react)](https://reactnative.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Redux Toolkit](https://img.shields.io/badge/Redux--Toolkit-State%20Management-purple?logo=redux)](https://redux-toolkit.js.org/)
+[![FlashList](https://img.shields.io/badge/FlashList-Performance-green?logo=shopify)](https://shopify.github.io/flash-list/)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+> Aplicativo mobile para gerenciamento de mesas com integração real-time à API Pigz, utilizando MVVM, FlashList e Redux Toolkit.
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 📑 Sumário
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- [1. Tecnologias Utilizadas](#1-tecnologias-utilizadas)
+- [2. Arquitetura](#2-arquitetura)
+- [3. Organização de Pastas](#3-organização-de-pastas)
+- [4. Funcionalidades Implementadas](#4-funcionalidades-implementadas)
+- [5. Regras de Negócio](#5-regras-de-negócio)
 
-```sh
-# Using npm
-npm start
+---
 
-# OR using Yarn
-yarn start
+## 1. Tecnologias Utilizadas
+
+- **React Native CLI** – Framework principal para desenvolvimento mobile nativo.
+- **TypeScript** – Tipagem estática para maior segurança e produtividade.
+- **Redux Toolkit** – Gerenciamento de estado global, com slices modulares.
+- **AsyncStorage** – Persistência local (cache dos dados de mesas).
+- **FlashList (Shopify)** – Lista performática para grandes volumes de dados.
+- **Axios** – Integração com APIs REST.
+- **Lucide Icons** – Ícones modernos (`SearchBar`).
+- **MaterialIcons** – Ícones vetoriais para a interface.
+- **Skeleton** – Componentes de carregamento animado.
+
+---
+
+## 2. Arquitetura
+
+**Padrão adotado:** `MVVM` (Model-View-ViewModel)
+
+| Camada       | Descrição                                                                 |
+|--------------|---------------------------------------------------------------------------|
+| **Model**    | Tipos e estruturas de dados (`types/Table.ts`).                          |
+| **View**     | Componentes de UI (`components/*`, `views/MapService`).                  |
+| **ViewModel**| `useMapServiceController` e `useHomeController`: lógica de estado, filtros e busca. |
+
+---
+
+## 3. Organização de Pastas
+
+```
+📁 store/
+ ┣ 📄 tableSlice.ts       # Lista de mesas, loading, error
+ ┗ 📄 index.ts            # Setup do Redux Toolkit + Thunk
+
+📁 types/
+ ┗ 📄 Table.ts            # Tipagem das mesas
+
+📁 utils/
+ ┗ 📄 formatters.ts       # Formatadores (ex: valores monetários)
+
+📁 components/
+ ┣ 📄 TableCard.tsx       # Card de mesa
+ ┣ 📄 SearchBar.tsx       # Busca por nome do cliente
+ ┣ 📄 FilterTabs.tsx      # Filtro por status
+ ┣ 📄 Header.tsx
+ ┣ 📄 OrderTypeModal.tsx
+ ┣ 📄 SkeletonCard.tsx
+ ┗ 📄 GlobalButton.tsx
+
+📁 screens/
+ ┣ 📁 Home/
+ ┃ ┣ 📄 index.tsx         # View principal
+ ┃ ┗ 📄 controller.ts     # Lógica de filtros e paginação
+ ┗ 📁 MapaService/
+   ┣ 📄 index.tsx
+   ┗ 📄 controller.ts
 ```
 
-## Step 2: Build and run your app
+---
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+## 4. Funcionalidades Implementadas
 
-### Android
+### 🔗 Integração com API (Pigz)
 
-```sh
-# Using npm
-npm run android
+- **Endpoint**: `GET https://test.pigz.dev/api/pdv/order-sheet/v2/checkpads`
+- **Auth**: Token via **Basic Authorization**
+- **Armazenamento**: Redux + cache em `AsyncStorage`
 
-# OR using Yarn
-yarn android
-```
+### ⚡ FlashList
 
-### iOS
+- `numColumns` para suporte a grids
+- `loadMoreTables` para paginação customizada
+- Loop infinito: ao final dos dados, mais 20 registros são carregados
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
+### 🎯 Filtro de Mesas
 
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+- Visão Geral
+- Em Atendimento
+- Disponível
+- Ociosas
+- Sem Pedidos
 
-```sh
-bundle install
-```
+### 🔎 Busca Integrada
 
-Then, and every time you update your native dependencies, run:
+- Busca por `customerName`
+- Busca por `title` (número da mesa)
 
-```sh
-bundle exec pod install
-```
+---
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+## 5. Regras de Negócio
 
-```sh
-# Using npm
-npm run ios
+| **Status**         | **Condição**                                               | **Cor do Card** |
+|--------------------|------------------------------------------------------------|-----------------|
+| **Disponível**     | Sem comanda (`activity === 'empty'`)                      | ⚪ Branco        |
+| **Sem Pedidos**    | Comanda aberta (`subtotal === 0`)                         | 🟡 Amarelo       |
+| **Em Atendimento** | Comanda aberta (`subtotal > 0`) e `idleTime ≤ 10 minutos` | 🟢 Verde         |
+| **Ociosas**        | `idleTime > 10 minutos` e `subtotal > 0`                  | 🔴 Vermelho      |
 
-# OR using Yarn
-yarn ios
-```
-
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
-
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
-
-## Step 3: Modify your app
-
-Now that you have successfully run the app, let's make changes!
-
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
-
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
-
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
