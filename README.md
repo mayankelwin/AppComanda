@@ -17,7 +17,7 @@
 - [3. Organização de Pastas](#3-organização-de-pastas)
 - [4. Funcionalidades Implementadas](#4-funcionalidades-implementadas)
 - [5. Regras de Negócio](#5-regras-de-negócio)
-- [5. Otimizações](#6-otimizações)
+- [5. Otimizações](#6-otimizações-realizadas-no-projeto)
 
 ---
 
