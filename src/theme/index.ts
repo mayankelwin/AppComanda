@@ -42,11 +42,12 @@ const theme = {
     SM: width * 0.04,
     MD: width * 0.06,
     LG: width * 0.08,
+    XL: width * 0.18,
   },
 
   SIZES: {
     cardy: width * 0.40,
-    button: width * 0.40,
+    button: width * 0.42,
   },
 
   BORDER_RADIUS: {
@@ -56,8 +57,8 @@ const theme = {
   },
 
   SCREEN: {
-    WIDTH: width,
-    HEIGHT: height,
+    HEIGHT: height * 0.08,
+    MT: height * 0.05,
   },
 };
 

@@ -2,10 +2,10 @@ import styled from "styled-components/native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 export const Container = styled.View`
+  width: 100%;
+  
   flex-direction: row;
   align-items: center;
-
-  
 
   padding: ${({ theme }) => theme.SPACING.SM}px;
 
@@ -24,6 +24,6 @@ export const InputSearch = styled.TextInput`
 `;
 
 export const Icon = styled(MaterialIcons)`
-  margin-right: 8px;
+  margin-right: ${({ theme }) => theme.SPACING.MD}px;
   color: ${({ theme }) => theme.COLORS.ORANGE};
 `;

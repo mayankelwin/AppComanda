@@ -6,8 +6,8 @@ const { height, width } = Dimensions.get("window");
 
 export const Container = styled.View`
   width: 100%;
-  height: ${height * 0.08}px;
-  margin-top: ${height * 0.05}px;
+  height: ${({ theme }) => theme.SCREEN.HEIGHT}px;
+  margin-top: ${({ theme }) => theme.SCREEN.MT}px;
   border-bottom-width: 5px;
   border-bottom-color: ${({ theme }) => theme.COLORS.BG_GRAY};
   justify-content: center;
@@ -21,12 +21,11 @@ export const ImgBox = styled.View`
 
 export const Logo = styled.Image`
   width: ${width * 0.5}px;
-  height: ${height * 0.03}px;
+  height: ${height * 0.04}px;
   align-self: center;
 `;
 
 export const Icon = styled(MaterialIcons)`
-  margin-right: ${({ theme }) => theme.SPACING.XS}px;
   color: ${({ theme }) => theme.COLORS.ORANGE};
 `;
 
@@ -34,10 +33,14 @@ export const Content = styled.View`
   margin-left: ${({ theme }) => theme.SPACING.MD}px;
   flex-direction: row;
   width: 100%;
+
   align-items: center;
+  text-align: center;
+
   background-color: ${({ theme }) => theme.COLORS.BG};
-  gap: ${({ theme }) => theme.SPACING.SM}px;
+  gap: ${({ theme }) => theme.SPACING.XL}px;
 `;
+
 
 export const Title = styled.Text`
   ${({ theme }) => css`

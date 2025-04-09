@@ -120,7 +120,7 @@
 
 ---
 
-# 🔧 Otimizações Realizadas no Projeto
+## 🔧 Otimizações Realizadas no Projeto
 
 ### 1. 📦 SearchBar
 - Remoção de estilos inline desnecessários.

@@ -2,14 +2,14 @@ import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
   width: 100%;
-  padding: ${({ theme }) => theme.SPACING.SM}px;
+  padding: ${({ theme }) => theme.SPACING.XS}px;
   background-color: ${({ theme }) => theme.COLORS.BG_GRAY};
   flex-direction: row;
 `;
 
 
 export const SelectedTab = styled.View<{ isActive: boolean }>`
-  padding: 14px 16px;
+  padding: 16px;
 
   border-radius: 25px;
   margin-right: 10px;
@@ -19,7 +19,7 @@ export const SelectedTab = styled.View<{ isActive: boolean }>`
           background-color: ${theme.COLORS.BLACK};
         `
       : css`
-          background-color: ${theme.COLORS.GRAY_200};
+          background-color: ${theme.COLORS.WHITE};
         `}
 `;
 

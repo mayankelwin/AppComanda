@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ButtonBack, Container, Content, Icon, ImgBox, Logo, Title } from "./styles";
+import { ButtonBack, Container, Content, ContentText, Icon, ImgBox, Logo, Title } from "./styles";
 import LogoImg from '../../assets/logo.png';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -22,13 +22,16 @@ export function Header( {visibleheader1 = false, visibleheader2 = false}: Props)
               <Logo source={LogoImg}/>
             </ImgBox>
           )}
+
           {visibleheader2 &&(
             <Content>
+              
               <ButtonBack onPress={() => navigation.goBack()}>
                 <Icon name="arrow-back" size={24}  />
-              </ButtonBack>
+              </ButtonBack>      
                 <Title>Mapa de atendimentos</Title>
-            </Content>
+          
+               </Content>
 
           )}
         </Container>
