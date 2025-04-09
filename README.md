@@ -79,7 +79,7 @@
  ┃ ┣ 📄 index.tsx
  ┃ ┣ 📄 controller.ts
  ┃ ┗ 📄 styles.ts         
- ┗ 📁 Home/
+ ┗ 📁 Settings/
    ┣ 📄 index.tsx        
    ┣ 📄 controller.ts    
    ┗ 📄 styles.ts         
