@@ -79,9 +79,9 @@
  ┃ ┣ 📄 controller.ts
  ┃ ┗ 📄 styles.ts         
  ┗ 📁 Home/
- ┃ ┣ 📄 index.tsx        
- ┃ ┣ 📄 controller.ts    
- ┃ ┗ 📄 styles.ts         
+   ┣ 📄 index.tsx        
+   ┣ 📄 controller.ts    
+   ┗ 📄 styles.ts         
 
 ```
 
