@@ -33,6 +33,7 @@
 - **Lucide Icons** – Ícones modernos (`SearchBar`).
 - **MaterialIcons** – Ícones vetoriais para a interface.
 - **Skeleton** – Componentes de carregamento animado.
+-  **Styled Components** – Para a estilização do componentes.
 
 ---
 
