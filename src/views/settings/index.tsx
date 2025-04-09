@@ -7,7 +7,6 @@ import {
   Title,
   Section,
   SectionTitle,
-  SettingRow,
   SettingText,
   Spacer,
 } from "./styles";
