@@ -30,17 +30,17 @@ export const Icon = styled(MaterialIcons)`
 `;
 
 export const Content = styled.View`
-  margin-left: ${({ theme }) => theme.SPACING.MD}px;
-  flex-direction: row;
   width: 100%;
+  flex-direction: row;
+
+  margin-left: ${({ theme }) => theme.SPACING.MD}px;
+  gap: ${({ theme }) => theme.SPACING.XL}px;
 
   align-items: center;
   text-align: center;
 
   background-color: ${({ theme }) => theme.COLORS.BG};
-  gap: ${({ theme }) => theme.SPACING.XL}px;
 `;
-
 
 export const Title = styled.Text`
   ${({ theme }) => css`
