@@ -31,7 +31,7 @@
 - **FlashList (Shopify)** – Lista performática para grandes volumes de dados.
 - **Axios** – Integração com APIs REST.
 - **Lucide Icons** – Ícones modernos (`SearchBar`).
-- **MaterialIcons** – Ícones vetoriais para a interface.
+- **Vector Icons** – Ícones vetoriais para a interface.
 - **Styled Components** – Para a estilização do componentes.
 - **SVG React native** – Para a transformação de SVG.
 
