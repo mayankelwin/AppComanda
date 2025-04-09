@@ -66,16 +66,23 @@
  ┣ 📄 FilterTabs.tsx      # Filtro por status
  ┣ 📄 Header.tsx
  ┣ 📄 OrderTypeModal.tsx
- ┣ 📄 SkeletonCard.tsx
+ ┣ 📄 Loading.tsx
  ┗ 📄 GlobalButton.tsx
 
 📁 screens/
  ┣ 📁 Home/
  ┃ ┣ 📄 index.tsx         # View principal
- ┃ ┗ 📄 controller.ts     # Lógica de filtros e paginação
- ┗ 📁 MapaService/
-   ┣ 📄 index.tsx
-   ┗ 📄 controller.ts
+ ┃ ┣ 📄 controller.ts     # Lógica de filtros e paginação
+ ┃ ┗ 📄 styles.ts         # Estilização
+ ┣ 📁 MapaService/
+ ┃ ┣ 📄 index.tsx
+ ┃ ┣ 📄 controller.ts
+ ┃ ┗ 📄 styles.ts         
+ ┗ 📁 Home/
+ ┃ ┣ 📄 index.tsx        
+ ┃ ┣ 📄 controller.ts    
+ ┃ ┗ 📄 styles.ts         
+
 ```
 
 ---
