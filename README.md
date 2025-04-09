@@ -17,7 +17,7 @@
 - [3. Organização de Pastas](#3-organização-de-pastas)
 - [4. Funcionalidades Implementadas](#4-funcionalidades-implementadas)
 - [5. Regras de Negócio](#5-regras-de-negócio)
-- [5. Otimizações Realizadas no Projeto](#otimizações-realizadas-no-projeto)
+- [5. Otimizações Realizadas no Projeto](#6-otimizações-realizadas-no-projeto)
 
 ---
 
@@ -120,7 +120,7 @@
 
 ---
 
-## 🔧 Otimizações Realizadas no Projeto
+## 6. Otimizações Realizadas no Projeto
 
 ### 1. 📦 SearchBar
 - Remoção de estilos inline desnecessários.
