@@ -7,9 +7,8 @@ export const Container = styled.View`
   flex-direction: row;
 `;
 
-
 export const SelectedTab = styled.View<{ isActive: boolean }>`
-  padding: 16px;
+  padding: 12px;
 
   border-radius: 25px;
   margin-right: 10px;
