@@ -4,6 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Redux Toolkit](https://img.shields.io/badge/Redux--Toolkit-State%20Management-purple?logo=redux)](https://redux-toolkit.js.org/)
 [![FlashList](https://img.shields.io/badge/FlashList-Performance-green?logo=shopify)](https://shopify.github.io/flash-list/)
+[![StyledComponents](https://img.shields.io/badge/Styled-Components-green?logo=styled-components)](https://styled-components.com/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 > Aplicativo mobile para gerenciamento de mesas com integração real-time à API Pigz, utilizando MVVM, FlashList e Redux Toolkit.
