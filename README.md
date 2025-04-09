@@ -24,7 +24,7 @@
 
 ## 1. Tecnologias Utilizadas
 
-- **React Native CLI** – Framework principal para desenvolvimento mobile nativo.
+- **React Native CLI** – Framework principal para desenvolvimento mobile nativo. (V:0.78.2)
 - **TypeScript** – Tipagem estática para maior segurança e produtividade.
 - **Redux Toolkit** – Gerenciamento de estado global, com slices modulares.
 - **AsyncStorage** – Persistência local (cache dos dados de mesas).
