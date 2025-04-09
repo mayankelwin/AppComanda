@@ -1,4 +1,9 @@
 {
   "name": "AppPigzComanda",
-  "displayName": "AppPigzComanda"
+  "displayName": "AppPigzComanda",
+  "packageOpts": {
+    "config": "metro.config.js",
+    "sourceExts": ["js", "jsx", "ts", "tsx", "svg"]
+  }
+  
 }

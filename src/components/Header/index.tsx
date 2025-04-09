@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ButtonBack, Container, Content, ContentText, Icon, ImgBox, Logo, Title } from "./styles";
+import { ButtonBack, Container, Content, Icon, ImgBox, Logo, Title } from "./styles";
 import LogoImg from '../../assets/logo.png';
+import LogoPigz from '../../assets/logopigz.svg';
 
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from "@react-navigation/native";
 
 type Props = {
@@ -12,14 +12,13 @@ type Props = {
 
 export function Header( {visibleheader1 = false, visibleheader2 = false}: Props) {
   const navigation = useNavigation();
-  const [headerVisible, setHeaderVisible] = useState(false);
     
 
     return (
         <Container>
           {visibleheader1 &&(
             <ImgBox>
-              <Logo source={LogoImg}/>
+              <LogoPigz width={250} height={40} fill={"any color"} />
             </ImgBox>
           )}
 
