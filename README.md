@@ -4,6 +4,7 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Redux Toolkit](https://img.shields.io/badge/Redux--Toolkit-State%20Management-purple?logo=redux)](https://redux-toolkit.js.org/)
 [![FlashList](https://img.shields.io/badge/FlashList-Performance-green?logo=shopify)](https://shopify.github.io/flash-list/)
+[![StyledComponents](https://img.shields.io/badge/Styled-Components-green?logo=styled-components)](https://styled-components.com/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 > Aplicativo mobile para gerenciamento de mesas com integração real-time à API Pigz, utilizando MVVM, FlashList e Redux Toolkit.
@@ -23,15 +24,16 @@
 
 ## 1. Tecnologias Utilizadas
 
-- **React Native CLI** – Framework principal para desenvolvimento mobile nativo.
+- **React Native CLI** – Framework principal para desenvolvimento mobile nativo. (V:0.78.2)
 - **TypeScript** – Tipagem estática para maior segurança e produtividade.
 - **Redux Toolkit** – Gerenciamento de estado global, com slices modulares.
 - **AsyncStorage** – Persistência local (cache dos dados de mesas).
 - **FlashList (Shopify)** – Lista performática para grandes volumes de dados.
 - **Axios** – Integração com APIs REST.
 - **Lucide Icons** – Ícones modernos (`SearchBar`).
-- **MaterialIcons** – Ícones vetoriais para a interface.
-- **Skeleton** – Componentes de carregamento animado.
+- **Vector Icons** – Ícones vetoriais para a interface.
+- **Styled Components** – Para a estilização do componentes.
+- **SVG React native** – Para a transformação de SVG.
 
 ---
 
@@ -66,16 +68,23 @@
  ┣ 📄 FilterTabs.tsx      # Filtro por status
  ┣ 📄 Header.tsx
  ┣ 📄 OrderTypeModal.tsx
- ┣ 📄 SkeletonCard.tsx
+ ┣ 📄 Loading.tsx
  ┗ 📄 GlobalButton.tsx
 
 📁 screens/
  ┣ 📁 Home/
  ┃ ┣ 📄 index.tsx         # View principal
- ┃ ┗ 📄 controller.ts     # Lógica de filtros e paginação
- ┗ 📁 MapaService/
-   ┣ 📄 index.tsx
-   ┗ 📄 controller.ts
+ ┃ ┣ 📄 controller.ts     # Lógica de filtros e paginação
+ ┃ ┗ 📄 styles.ts         # Estilização
+ ┣ 📁 MapaService/
+ ┃ ┣ 📄 index.tsx
+ ┃ ┣ 📄 controller.ts
+ ┃ ┗ 📄 styles.ts         
+ ┗ 📁 Settings/
+   ┣ 📄 index.tsx        
+   ┣ 📄 controller.ts    
+   ┗ 📄 styles.ts         
+
 ```
 
 ---
@@ -120,7 +129,7 @@
 
 ---
 
-## 🔧 Otimizações Realizadas no Projeto
+## 6. Otimizações Realizadas no Projeto
 
 ### 1. 📦 SearchBar
 - Remoção de estilos inline desnecessários.
