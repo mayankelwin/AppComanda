@@ -6,7 +6,7 @@ type Props ={
 }
 
 export const Botton = styled.TouchableOpacity<Props>`
-margin-top: 35px;
+margin-top: 10px;
 width: 100%;
 height: 50px; 
 border-radius: 25px;
@@ -23,4 +23,36 @@ export const Title = styled.Text<Props>`
 `
 export const Content = styled.View`
   flex: 1;
+  margin-bottom: 20px;
   `
+  
+export const Section = styled.View`
+  margin-top: 24px;
+  padding-bottom: 12px;
+  border-bottom-width: 1px;
+  border-color: ${({ theme }) => theme.COLORS.GRAY_200};
+`;
+
+export const SectionTitle = styled.Text`
+  font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
+  color: ${({ theme }) => theme.COLORS.GRAY_600};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.bold};
+  margin-bottom: 12px;
+`;
+
+export const SettingRow = styled.View`
+  flex-direction: row;
+  align-items: center;
+  padding-vertical: 10px;
+  gap: 12px;
+`;
+
+export const SettingText = styled.Text`
+  font-size: ${({ theme }) => theme.FONT_SIZE.MD}px;
+  color: ${({ theme }) => theme.COLORS.BLACK};
+  font-family: ${({ theme }) => theme.FONT_FAMILY.regular};
+`;
+
+export const Spacer = styled.View`
+  flex: 1;
+`;

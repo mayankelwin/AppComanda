@@ -118,3 +118,54 @@
 | **Ociosas**        | `idleTime > 10 minutos` e `subtotal > 0`                  | 🔴 Vermelho      |
 
 ---
+
+# 🔧 Otimizações Realizadas no Projeto
+
+### 1. 📦 SearchBar
+- Remoção de estilos inline desnecessários.
+- Uso de `styled-components` para manter consistência visual.
+- Organização das props para melhor leitura e manutenção.
+- Adição de `keyboardType="default"` como padrão explícito.
+
+---
+
+### 2. 🪑 TableCard
+- Criação de função `getTranslatedStatus` para mapear status da API em status.
+- Uso de variáveis auxiliares (`isEmpty`, `showCustomerName`) para clareza nas condições.
+- Condições otimizadas para exibição de informações do cliente e pedidos.
+- Preenchimento com valores padrão usando `??` para evitar dados indefinidos.
+- Renderização do status com ícone apenas quando necessário.
+
+---
+
+### 3. ⚙️ Tela Settings (Configurações)
+- Uso do componente `SettingOption` com `styled-components` para evitar repetição de código.
+- Organização das seções: **Conta**, **Notificações** e **Preferências**.
+- Padronização dos ícones com `MaterialIcon`.
+- Componentes reativos com `Switch` adicionados para interatividade.
+- Navegação fluida entre páginas com handlers limpos (`handleMap`, `handleSettings`).
+
+---
+
+### 4. 🏠 Tela Home
+- Separação clara de handlers (`handleOpenModal`, `handleCloseModal`, `handleSelectOrder`) para maior legibilidade.
+- Organização visual do JSX com foco em escaneabilidade e clareza.
+- Modal de tipo de pedido centralizado com `OrderTypeModal`.
+- Uso do hook `useHomeController` para separar a lógica da interface.
+
+---
+
+### 4. 🗾 Tela MapSevice
+- Uso do hook `useMapServiceController` para separar a lógica da interface.
+- Criação de função `getTranslatedStatus` para mapear status da API em status. 
+
+---
+
+### ✅ Benefícios Gerais
+- Código mais limpo, legível e desacoplado.
+- Componentes mais reutilizáveis e consistentes.
+- Preparado para suporte a temas (dark/light).
+- Melhor manutenção e escalabilidade futura.
+
+---
+

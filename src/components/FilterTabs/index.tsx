@@ -1,37 +1,52 @@
+import React, { useRef, useEffect, useCallback, memo } from "react";
 import { FlatList, TouchableOpacity } from "react-native";
-import { useRef, useEffect } from "react";
 import { Container, TabText, SelectedTab } from "./styles";
 
 const filters = ["Em Atendimento", "Ociosas", "Sem Pedidos", "Disponível"];
-const fixedFilters = ["Visão Geral"];
+const TAB_WIDTH = 120; 
 
 type Props = {
   selected: string;
   onSelect: (tab: string) => void;
 };
 
-export function FilterTabs({ selected, onSelect }: Props) {
-  const flatListRef = useRef<FlatList>(null);
+const FilterTabsComponent = ({ selected, onSelect }: Props) => {
+  const flatListRef = useRef<FlatList<string>>(null);
 
-  const getFilterIndex = (filter: string) => {
-    return filters.findIndex((item) => item === filter);
-  };
-
-  useEffect(() => {
+  const scrollToSelected = useCallback(() => {
     if (selected === "Visão Geral") {
       flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
       return;
     }
 
-    const index = getFilterIndex(selected);
-    if (index !== -1 && flatListRef.current) {
-      flatListRef.current.scrollToIndex({
+    const index = filters.findIndex((item) => item === selected);
+    if (index !== -1) {
+      flatListRef.current?.scrollToIndex({
         index,
         animated: true,
         viewPosition: 0.5,
       });
     }
   }, [selected]);
+
+  useEffect(() => {
+    scrollToSelected();
+  }, [scrollToSelected]);
+
+  const renderItem = useCallback(
+    ({ item }: { item: string }) => {
+      const isActive = selected === item;
+
+      return (
+        <TouchableOpacity onPress={() => onSelect(item)}>
+          <SelectedTab isActive={isActive}>
+            <TabText isActive={isActive}>{item}</TabText>
+          </SelectedTab>
+        </TouchableOpacity>
+      );
+    },
+    [onSelect, selected]
+  );
 
   return (
     <Container>
@@ -43,19 +58,20 @@ export function FilterTabs({ selected, onSelect }: Props) {
 
       <FlatList
         ref={flatListRef}
-        keyboardShouldPersistTaps="always"
-        horizontal
         data={filters}
         keyExtractor={(item) => item}
+        horizontal
+        initialScrollIndex={0}
         showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => onSelect(item)}>
-            <SelectedTab isActive={selected === item}>
-              <TabText isActive={selected === item}>{item}</TabText>
-            </SelectedTab>
-          </TouchableOpacity>
-        )}
+        renderItem={renderItem}
+        getItemLayout={(_, index) => ({
+          length: TAB_WIDTH,
+          offset: TAB_WIDTH * index,
+          index,
+        })}
       />
     </Container>
   );
-}
+};
+
+export const FilterTabs = memo(FilterTabsComponent);

@@ -21,6 +21,7 @@ export const SubTitle = styled.Text`
 
 export const Content = styled.View`
   ${({ theme }) => css`
+    
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;

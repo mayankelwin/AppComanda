@@ -1,14 +1,11 @@
 import styled, { css } from "styled-components/native";
 import { Dimensions } from "react-native";
 
-
-
 const { width } = Dimensions.get("window");
 
 const buttonWidth = width * 0.40;
 
 export const Container = styled.View`
-  padding: ${({ theme }) => theme.SPACING.SM}px;
   background-color: ${({ theme }) => theme.COLORS.GRAY_100};
 `;
 

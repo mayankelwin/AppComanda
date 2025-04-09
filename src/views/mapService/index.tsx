@@ -1,15 +1,17 @@
-import { Header } from "../../components/Header";
+import { useRef, useEffect, useCallback, useMemo } from "react";
+import { FlashList } from "@shopify/flash-list";
+
 import { Container } from "../../theme/global";
 import { GridContainer } from "./styles";
-import { formatCurrency} from "../../utils/formatters";
+import { formatCurrency } from "../../utils/formatters";
 
+import { Header } from "../../components/Header";
 import { SearchBar } from "../../components/SearchBar";
 import { FilterTabs } from "../../components/FilterTabs";
 import { TableCard } from "../../components/TableCard";
-import { FlashList } from "@shopify/flash-list";
+import { Loading } from "../../components/Loading";
 
 import { useMapServiceController } from "./controller";
-import { useRef, useEffect } from "react";
 
 export function MapaService() {
   const {
@@ -19,61 +21,74 @@ export function MapaService() {
     loadMoreTables,
     searchTerm,
     setSearchTerm,
+    isLoading,
   } = useMapServiceController();
 
   const listRef = useRef<FlashList<any>>(null);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      listRef.current?.scrollToOffset({ offset: 0, animated: true });
-    }, 100);
-
-    return () => clearTimeout(timeout);
+    if (listRef.current) {
+      listRef.current.scrollToOffset({ offset: 0, animated: true });
+    }
   }, [selectedFilter]);
+
+  const keyExtractor = useCallback((item: any, index: number) => `${item.id}-${index}`, []);
+
+  const renderItem = useCallback(
+    ({ item }: { item: any }) => (
+      <TableCard
+        number={item.title}
+        status={item.status}
+        client={item.orderSheets?.[0]?.user?.name ?? ""}
+        customerName={item.orderSheets?.[0]?.customerName ?? ""}
+        waitingTime={item.idleTime}
+        bill={
+          item.orderSheets?.[0]?.subtotal != null
+            ? formatCurrency(item.orderSheets[0].subtotal)
+            : undefined
+        }
+        ordersCount={1}
+        customersCount={item.orderSheets?.[0]?.numberOfCustomers ?? 0}
+      />
+    ),
+    []
+  );
+
+  const contentContainerStyle = useMemo(
+    () => ({ gap: 12, paddingBottom: 16 }),
+    []
+  );
+
+  const columnWrapperStyle = useMemo(() => ({ gap: 12 }), []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <Container>
       <Header visibleheader2 />
       <SearchBar
-       placeholder="Cliente, mesa, comanda, atendente"
-       value={searchTerm}
-       onChangeText={setSearchTerm}
+        placeholder="Cliente, mesa, comanda, atendente"
+        value={searchTerm}
+        onChangeText={setSearchTerm}
       />
 
       <GridContainer>
-      <FilterTabs
-        selected={selectedFilter}
-        onSelect={setSelectedFilter}
-      />
+        <FilterTabs selected={selectedFilter} onSelect={setSelectedFilter} />
+
         <FlashList
           ref={listRef}
           data={tables}
-          keyboardShouldPersistTaps="always"
-          
-          keyExtractor={(item, index) => `${item.id}-${index}`}
+          keyExtractor={keyExtractor}
+          renderItem={renderItem}
+          estimatedItemSize={220}
           numColumns={3}
-          estimatedItemSize={200}
-          showsVerticalScrollIndicator={false}
           onEndReached={loadMoreTables}
           onEndReachedThreshold={0.5}
-          contentContainerStyle={{ gap: 12, paddingBottom: 16 }}
-          columnWrapperStyle={{ gap: 12 }}
-          renderItem={({ item }) => (
-            <TableCard
-              number={item.title}
-              status={item.status}
-              client={item.orderSheets?.[0]?.user?.name ?? ""}
-              customerName={item.orderSheets?.[0]?.customerName ?? ""}
-              waitingTime={item.idleTime }
-              bill={
-                item.orderSheets?.[0]?.subtotal != null
-                  ? formatCurrency(item.orderSheets[0].subtotal)
-                  : undefined
-              }
-              ordersCount={1}
-              customersCount={item.orderSheets?.[0]?.numberOfCustomers ?? 0}
-            />
-          )}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={contentContainerStyle}
+          columnWrapperStyle={columnWrapperStyle}
         />
       </GridContainer>
     </Container>

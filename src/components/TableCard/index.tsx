@@ -3,7 +3,7 @@ import { Container, TableNumber, Info, Icon, StatusTag, InfoText } from "./style
 type Props = {
   number: string;
   status: string;
-  client?: string; 
+  client?: string;
   waitingTime?: string;
   bill?: string;
   ordersCount?: number;
@@ -11,49 +11,38 @@ type Props = {
   customerName?: string;
 };
 
-const getTranslatedStatus = (apiStatus: string) => {
-  switch (apiStatus) {
-    case "active":
-    case "Em Atendimento":
-      return "Em Atendimento";
+const getTranslatedStatus = (status: string) => {
+  const map: Record<string, string> = {
+    active: "Em Atendimento",
+    "Em Atendimento": "Em Atendimento",
+    busy: "Em Atendimento",
+    Ocupada: "Em Atendimento",
+    empty: "Disponível",
+    Disponível: "Disponível",
+    Ociosas: "Ociosas",
+    "Sem Pedidos": "Sem Pedidos",
+  };
 
-    case "empty":
-    case "Disponível":
-      return "Disponível";
-
-    case "busy":
-    case "Ocupada":
-      return "Em Atendimento"; 
-
-    case "Ociosas":
-      return "Ociosas";
-
-    case "Sem Pedidos":
-      return "Sem Pedidos";
-      
-    default:
-      return "—";
-  }
+  return map[status] || "—";
 };
 
 export function TableCard({
   number,
   status,
   client,
-  waitingTime,
-  bill,
-  ordersCount,
-  customersCount,
+  waitingTime = "0",
+  bill = "—",
+  ordersCount = 0,
+  customersCount = 0,
   customerName,
 }: Props) {
   const translatedStatus = getTranslatedStatus(status);
-
   const isEmpty =
     translatedStatus === "Disponível" ||
     (!client && !waitingTime && !bill && (status === "—" || !status));
 
   const showCustomerName =
-    customersCount === 1 && customerName && customerName.trim().length > 0;
+    customersCount === 1 && customerName?.trim();
 
   return (
     <Container status={isEmpty ? "Disponível" : translatedStatus}>
@@ -61,22 +50,18 @@ export function TableCard({
 
       {!isEmpty && (
         <>
-          {!showCustomerName && (
+          {!showCustomerName ? (
             <>
               <Info>
                 <Icon name="receipt" size={15} />
-                <InfoText>{ordersCount ?? 0}</InfoText>
+                <InfoText>{ordersCount}</InfoText>
               </Info>
-
               <Info>
                 <Icon name="person" size={15} />
-                <InfoText>
-                  {`${customersCount ?? 0} ${(customersCount ?? 0) > 1 ? "s" : ""}`}
-                </InfoText>
+                <InfoText>{`${customersCount} ${customersCount > 1 ? "s" : ""}`}</InfoText>
               </Info>
             </>
-          )}
-          {showCustomerName && (
+          ) : (
             <Info>
               <Icon name="person" size={15} />
               <InfoText>{customerName}</InfoText>
@@ -85,22 +70,22 @@ export function TableCard({
 
           <Info>
             <Icon name="timer" size={15} />
-            <InfoText>{waitingTime ?? "0"}min</InfoText>
+            <InfoText>{waitingTime}min</InfoText>
           </Info>
 
           <Info>
             <Icon name="attach-money" size={15} />
-            <InfoText>{bill ?? "—"}</InfoText>
+            <InfoText>{bill}</InfoText>
           </Info>
         </>
       )}
 
-{translatedStatus !== "Disponível" && (
-  <Info>
-    <Icon name="room-service" size={15} />
-    <StatusTag status={translatedStatus}>{translatedStatus}</StatusTag>
-  </Info>
-)}
+      {translatedStatus !== "Disponível" && (
+        <Info>
+          <Icon name="room-service" size={15} />
+          <StatusTag status={translatedStatus}>{translatedStatus}</StatusTag>
+        </Info>
+      )}
     </Container>
   );
 }

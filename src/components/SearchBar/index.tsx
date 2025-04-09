@@ -6,18 +6,21 @@ type SearchBarProps = {
   onChangeText?: (text: string) => void;
 };
 
-export function SearchBar({ placeholder, value, onChangeText, }: SearchBarProps) {
+export function SearchBar({
+  placeholder,
+  value,
+  onChangeText,
+}: SearchBarProps) {
   return (
     <Container>
       <Icon name="search" size={24} />
-      <InputSearch 
+      <InputSearch
         placeholder={placeholder}
         placeholderTextColor="#616161"
-        style={{fontSize: 16}}
         value={value}
         onChangeText={onChangeText}
         keyboardType="default"
-        
+        accessibilityLabel="Campo de busca"
       />
     </Container>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTables } from "../../store/tableSlice";
 import { RootState } from "../../store";
@@ -14,14 +14,23 @@ export function useMapServiceController() {
   const [selectedFilter, setSelectedFilter] = useState<FiltroStatus>("Visão Geral");
   const [renderedTables, setRenderedTables] = useState<Table[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const dispatch = useDispatch();
   const { tables: tablesRedux, loading, error } = useSelector((state: RootState) => state.table);
 
-  useEffect(() => {
-    dispatch(fetchTables() as any);
+  // Fetch inicial
+  const fetchData = useCallback(async () => {
+    setIsLoading(true);
+    await dispatch(fetchTables() as any);
+    setIsLoading(false);
   }, [dispatch]);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  // Normaliza os dados da API
   const normalizedTables = useMemo<Table[]>(() => {
     if (!Array.isArray(tablesRedux)) return [];
 
@@ -56,55 +65,54 @@ export function useMapServiceController() {
     });
   }, [tablesRedux]);
 
+  // Aplica filtro e busca
   const filteredTables = useMemo(() => {
-    const filtered = normalizedTables.filter((table) => {
-      switch (selectedFilter) {
-        case "Em Atendimento":
-          return table.status === "Em Atendimento";
-        case "Ociosas":
-          return table.status === "Ociosas";
-        case "Sem Pedidos":
-          return table.status === "Sem Pedidos";
-        case "Disponível":
-          return table.status === "Disponível";
-        default:
-          return true;
-      }
-    });
+    let result = normalizedTables;
 
-    if (searchTerm.trim() === "") return filtered;
+    if (selectedFilter !== "Visão Geral") {
+      result = result.filter((table) => table.status === selectedFilter);
+    }
+
+    if (searchTerm.trim().length === 0) return result;
 
     const lowerSearch = searchTerm.toLowerCase();
 
-    return filtered.filter((table) => {
+    return result.filter((table) => {
       const titleMatch = table.title?.toLowerCase().includes(lowerSearch);
       const nameMatch = table.orderSheets?.[0]?.customerName?.toLowerCase().includes(lowerSearch);
       return titleMatch || nameMatch;
     });
   }, [normalizedTables, selectedFilter, searchTerm]);
 
-  // Reset ao trocar filtro ou busca
+  // Reset paginado sempre que filtro ou busca mudar
   useEffect(() => {
     const initial = filteredTables.slice(0, PAGE_SIZE);
     setRenderedTables(initial);
     setCurrentIndex(PAGE_SIZE);
   }, [filteredTables]);
 
-  const loadMoreTables = () => {
+  // Carrega mais resultados ao scrollar
+  const loadMoreTables = useCallback(() => {
     const nextBatch = filteredTables.slice(
       renderedTables.length,
       renderedTables.length + PAGE_SIZE
     );
-  
+
+    const insertData = (data: Table[]) => {
+      setRenderedTables((prev) => [...prev, ...data]);
+    };
+
     if (nextBatch.length > 0) {
-      setTimeout(() => {
-        setRenderedTables((prev) => [...prev, ...nextBatch]);
-      }, 500);
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(() => insertData(nextBatch));
+      } else {
+        setTimeout(() => insertData(nextBatch), 300);
+      }
     } else if (
       (selectedFilter === "Disponível" || selectedFilter === "Visão Geral") &&
-      searchTerm.trim() === ""
+      searchTerm.trim().length === 0
     ) {
-      // Gerar novos cards "Disponíveis" apenas nos filtros "Disponível" ou "Visão Geral"
+      // Gera mesas fake para scroll infinito
       const fakeTables: Table[] = Array.from({ length: PAGE_SIZE }, (_, index) => ({
         id: `fake-${renderedTables.length + index}`,
         title: ` ${renderedTables.length + index + 1}`,
@@ -120,17 +128,18 @@ export function useMapServiceController() {
         hash: "",
         hasPdv: false,
       }));
-  
-      setTimeout(() => {
-        setRenderedTables((prev) => [...prev, ...fakeTables]);
-      }, 500);
+
+      if ("requestIdleCallback" in window) {
+        requestIdleCallback(() => insertData(fakeTables));
+      } else {
+        setTimeout(() => insertData(fakeTables), 300);
+      }
     }
-  };
-  
-  
+  }, [filteredTables, renderedTables.length, selectedFilter, searchTerm]);
 
   return {
     loading,
+    isLoading,
     error,
     selectedFilter,
     setSelectedFilter,
