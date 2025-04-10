@@ -77,10 +77,10 @@ export function MapaService() {
           data={tables}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
-          estimatedItemSize={theme.SIZES.cardy *10}
+          estimatedItemSize={theme.SIZES.cardy}
           decelerationRate={0.92}
           estimatedListSize={{
-            height: theme.SIZES.cardy,
+            height: theme.SIZES.cardy * 10,
             width: Dimensions.get('screen').width-8,
           }}
           numColumns={3}
