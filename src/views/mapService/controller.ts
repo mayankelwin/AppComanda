@@ -112,7 +112,8 @@ export function useMapServiceController() {
       (selectedFilter === "Disponível" || selectedFilter === "Visão Geral") &&
       searchTerm.trim().length === 0
     ) {
-      // Gera mesas fake para scroll infinito
+
+    // Gera mesas fake para scroll infinito
       const fakeTables: Table[] = Array.from({ length: PAGE_SIZE }, (_, index) => ({
         id: `fake-${renderedTables.length + index}`,
         title: ` ${renderedTables.length + index + 1}`,
