@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback, useMemo } from "react";
+import { Dimensions } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 
 import { Container } from "../../theme/global";
@@ -12,6 +13,7 @@ import { TableCard } from "../../components/TableCard";
 import { Loading } from "../../components/Loading";
 
 import { useMapServiceController } from "./controller";
+import theme from "../../theme";
 
 export function MapaService() {
   const {
@@ -54,13 +56,6 @@ export function MapaService() {
     []
   );
 
-  const contentContainerStyle = useMemo(
-    () => ({ gap: 12, paddingBottom: 16 }),
-    []
-  );
-
-  const columnWrapperStyle = useMemo(() => ({ gap: 12 }), []);
-
   if (isLoading) {
     return <Loading />;
   }
@@ -82,13 +77,17 @@ export function MapaService() {
           data={tables}
           keyExtractor={keyExtractor}
           renderItem={renderItem}
-          estimatedItemSize={220}
+          estimatedItemSize={theme.SIZES.cardy *10}
+          decelerationRate={0.92}
+          estimatedListSize={{
+            height: theme.SIZES.cardy,
+            width: Dimensions.get('screen').width-8,
+          }}
           numColumns={3}
           onEndReached={loadMoreTables}
           onEndReachedThreshold={0.5}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={contentContainerStyle}
-          columnWrapperStyle={columnWrapperStyle}
+          contentContainerStyle={{paddingBottom: 16,}}
         />
       </GridContainer>
     </Container>

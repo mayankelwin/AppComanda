@@ -1,8 +1,8 @@
-import { ButtonBack, Container, Content, Icon, ImgBox, Title } from "./styles";
-import LogoPigz from '../../assets/logopigz.svg';
-
-import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import LogoPigz from '../../assets/logopigz.svg';
+import { ButtonBack, Container, Content, Icon, ImgBox, Title } from "./styles";
 
 type Props = {
   visibleheader1?: boolean;
